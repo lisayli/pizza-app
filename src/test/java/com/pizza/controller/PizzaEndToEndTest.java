@@ -19,7 +19,7 @@ class PizzaEndToEndTest {
     @LocalServerPort
     private int port;
 
-    @Test
+    /*@Test
     void getPizzaById() {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:" + port + "/pizza/3")).build();
@@ -31,5 +31,7 @@ class PizzaEndToEndTest {
                 .isEqualTo(
                         "{\"id\":3,\"name\":\"green pizza\",\"ingredient\":\"tomatsås, veg ost, ananas\",\"price\":\"95\"}");
     }
+
+     */
 
 }

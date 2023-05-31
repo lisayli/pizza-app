@@ -38,10 +38,9 @@ public class PizzaController {
 
     @PostMapping("/add")
     @ApiOperation("Create a new pizza")
-    public Pizza addPizza(@RequestBody Pizza pizza) {
-        pizzaService.addPizza(pizza);
+    public Pizza createPizza(@RequestBody Pizza pizza) {
         rabbitMQSender.sendMessage(pizza);
-        return pizzaService.addPizza(pizza);
+        return pizzaService.createPizza(pizza);
     }
 
     @DeleteMapping("/delete/{id}")

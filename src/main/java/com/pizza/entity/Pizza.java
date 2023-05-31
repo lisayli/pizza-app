@@ -6,6 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -17,8 +21,11 @@ public class Pizza {
     private Long id;
 
     private String name;
-    private String ingredient;
     private String price;
+
+
+    private String ingredient;
+
 
 
 }
