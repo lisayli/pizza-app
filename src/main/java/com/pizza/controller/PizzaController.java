@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pizza")
+@RequestMapping("api/v1/pizza")
 @Api(tags = "Pizza Controller")
 public class PizzaController {
 
@@ -36,10 +36,10 @@ public class PizzaController {
         return pizzaService.getPizzaById(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/create")
     @ApiOperation("Create a new pizza")
     public Pizza createPizza(@RequestBody Pizza pizza) {
-        rabbitMQSender.sendMessage(pizza);
+       // rabbitMQSender.sendMessage(pizza);
         return pizzaService.createPizza(pizza);
     }
 

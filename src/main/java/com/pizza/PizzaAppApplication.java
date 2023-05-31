@@ -8,8 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-import static com.pizza.user.Role.ADMIN;
-import static com.pizza.user.Role.MANAGER;
+import static com.pizza.user.Role.*;
 
 //@EnableSwagger2
 @EnableWebSecurity
@@ -42,6 +41,16 @@ public class PizzaAppApplication {
                     .role(MANAGER)
                     .build();
             System.out.println("Manager token: " + service.register(manager).getAccessToken());
+
+
+            var user = RegisterRequest.builder()
+                    .firstname("User")
+                    .lastname("Ylikangas")
+                    .email("user@mail.com")
+                    .password("password")
+                    .role(USER)
+                    .build();
+            System.out.println("User token: " + service.register(user).getAccessToken());
 
         };
     }

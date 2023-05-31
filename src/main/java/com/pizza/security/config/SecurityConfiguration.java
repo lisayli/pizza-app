@@ -18,8 +18,7 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 
 import static com.pizza.user.Permission.*;
-import static com.pizza.user.Role.ADMIN;
-import static com.pizza.user.Role.MANAGER;
+import static com.pizza.user.Role.*;
 import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -66,12 +65,13 @@ public class SecurityConfiguration {
                 .requestMatchers(DELETE, "/api/v1/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
 
 
-                /* .requestMatchers("/api/v1/admin/**").hasRole(ADMIN.name())
+                /* Secure user endpoints */
+                 .requestMatchers("/api/v1/user/**").hasAnyRole(ADMIN.name(), USER.name())
 
-                 .requestMatchers(GET, "/api/v1/admin/**").hasAuthority(ADMIN_READ.name())
-                 .requestMatchers(POST, "/api/v1/admin/**").hasAuthority(ADMIN_CREATE.name())
-                 .requestMatchers(PUT, "/api/v1/admin/**").hasAuthority(ADMIN_UPDATE.name())
-                 .requestMatchers(DELETE, "/api/v1/admin/**").hasAuthority(ADMIN_DELETE.name())*/
+                 .requestMatchers(GET, "/api/v1/user/**").hasAuthority(USER_READ.name())
+                 .requestMatchers(POST, "/api/v1/user/**").hasAuthority(USER_CREATE.name())
+                 .requestMatchers(PUT, "/api/v1/user/**").hasAuthority(USER_UPDATE.name())
+                 .requestMatchers(DELETE, "/api/v1/user/**").hasAuthority(USER_DELETE.name())
 
 
                 .anyRequest()
