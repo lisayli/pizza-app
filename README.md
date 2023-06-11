@@ -4,15 +4,15 @@ Säkrade endpoints för de med ADMIN och MANAGER behörigheter,
 
 använder mySQL databas  och rabbit mq som jag kör via en docker container.
 
-** Starta pizza-app och order-service**
+**** Starta pizza-app och order-service****
 
 ADMIN kommer åt alla rolers behörigheter
 MANAGER är begränsad till vid del
 USER kan enbart läsa och skicka välja sin order
 
-http://localhost:8080/api/v1/admin/
-http://localhost:8080/api/v1/management/
-http://localhost:8080/api/v1/pizza/
+**http://localhost:8080/api/v1/admin/**
+**http://localhost:8080/api/v1/management/**
+**http://localhost:8080/api/v1/pizza/**
 
 
 **Admin token**: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBtYWlsLmNvbSIsImlhdCI6MTY4NjQ5OTM4OCwiZXhwIjoxNjg2NTg1Nzg4fQ.fIV-4l810vJIV_VTtgBoACSGX-NCuiUtWRpfZ9o06KE
