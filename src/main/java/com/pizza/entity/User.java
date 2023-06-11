@@ -1,6 +1,7 @@
-package com.pizza.user;
+package com.pizza.entity;
 
 import com.pizza.security.token.Token;
+import com.pizza.security.config.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

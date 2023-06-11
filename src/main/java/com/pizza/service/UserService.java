@@ -1,5 +1,10 @@
-package com.pizza.user;
+package com.pizza.service;
 
+import com.pizza.entity.User;
+import com.pizza.repository.UserRepository;
+import org.springframework.stereotype.Service;
+
+@Service
 public class UserService {
 
     private final UserRepository userRepository;

@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-import static com.pizza.user.Role.*;
+import static com.pizza.security.config.Role.*;
 
 //@EnableSwagger2
 @EnableWebSecurity

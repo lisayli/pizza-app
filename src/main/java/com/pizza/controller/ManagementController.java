@@ -1,37 +1,26 @@
 package com.pizza.controller;
 
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import com.pizza.entity.Pizza;
+import com.pizza.service.PizzaService;
+import com.pizza.service.RabbitMQSender;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/management")
 @Tag(name = "Management")
 public class ManagementController {
 
+    private final PizzaService pizzaService;
+    private final RabbitMQSender rabbitMQSender;
 
-    @Operation(
-            description = "Get endpoint for manager",
-            summary = "This is a summary for management get endpoint",
-            responses = {
-                    @ApiResponse(
-                            description = "Success",
-                            responseCode = "200"
-                    ),
-                    @ApiResponse(
-                            description = "Unauthorized / Invalid Token",
-                            responseCode = "403"
-                    )
-            }
+    public ManagementController(PizzaService pizzaService, RabbitMQSender rabbitMQSender) {
+        this.pizzaService = pizzaService;
+        this.rabbitMQSender = rabbitMQSender;
+    }
 
-    )
     @GetMapping
     public String get() {
         return "GET:: management controller";
@@ -47,5 +36,12 @@ public class ManagementController {
     @DeleteMapping
     public String delete() {
         return "DELETE:: management controller";
+    }
+
+    @PostMapping("/create")
+    @ApiOperation("Create a new pizza")
+    public Pizza createPizza(@RequestBody Pizza pizza) {
+        rabbitMQSender.sendOrderDetailsMessage(pizza);
+        return pizzaService.createPizza(pizza);
     }
 }

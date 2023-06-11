@@ -1,32 +1,37 @@
 package com.pizza.controller;
 
 
+import com.pizza.auth.UserRequest;
 import com.pizza.entity.Pizza;
 import com.pizza.service.PizzaService;
+import com.pizza.service.RabbitMQSender;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+/*
 
+ */
 @RestController
 @RequestMapping("api/v1/pizza")
 @Api(tags = "Pizza Controller")
-public class PizzaController {
+public class PizzaOrderController {
 
     private final PizzaService pizzaService;
     private final RabbitMQSender rabbitMQSender;
 
     @Autowired
-    public PizzaController(PizzaService pizzaService, RabbitMQSender rabbitMQSender) {
+    public PizzaOrderController(PizzaService pizzaService, RabbitMQSender rabbitMQSender) {
         this.pizzaService = pizzaService;
         this.rabbitMQSender = rabbitMQSender;
     }
 
 
-    @GetMapping("/getall")
+    @GetMapping()
     public List<Pizza> getAllPizzas() {
+
         return pizzaService.getPizzas();
     }
 
@@ -36,12 +41,15 @@ public class PizzaController {
         return pizzaService.getPizzaById(id);
     }
 
-    @PostMapping("/create")
-    @ApiOperation("Create a new pizza")
-    public Pizza createPizza(@RequestBody Pizza pizza) {
-       // rabbitMQSender.sendMessage(pizza);
-        return pizzaService.createPizza(pizza);
+    @PostMapping("/send/{id}")
+    public String sendOrder(@RequestBody UserRequest userRequest, @PathVariable(value = "id") Long id) {
+        Pizza pizza = pizzaService.getPizzaById(id);
+        rabbitMQSender.send(userRequest);
+        rabbitMQSender.sendOrderDetailsMessage(pizza);
+
+        return "sent!";
     }
+
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation("Delete a pizza")

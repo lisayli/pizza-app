@@ -1,6 +1,6 @@
 package com.pizza.auth;
 
-import com.pizza.user.Role;
+import com.pizza.security.config.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

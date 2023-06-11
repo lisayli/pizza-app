@@ -1,4 +1,4 @@
-package com.pizza.user;
+package com.pizza.security.config;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

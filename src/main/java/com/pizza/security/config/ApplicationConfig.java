@@ -1,6 +1,6 @@
 package com.pizza.security.config;
 
-import com.pizza.user.UserRepository;
+import com.pizza.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
