@@ -1,8 +1,9 @@
-package com.pizza.controller;
+package com.pizza.service;
 
+import com.pizza.auth.UserRequest;
 import com.pizza.config.MessagingConfig;
 import com.pizza.entity.Pizza;
-import com.pizza.user.User;
+import com.pizza.entity.User;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,13 @@ public class RabbitMQSender {
         rabbitTemplate.convertAndSend(
                 MessagingConfig.EXCHANGE,
                 MessagingConfig.ROUTING_KEY, pizzaInfo);
+        return "SUCCESS!!";
+    }
+
+    public String send(UserRequest userRequest) {
+        rabbitTemplate.convertAndSend(
+                MessagingConfig.EXCHANGE,
+                MessagingConfig.ROUTING_KEY, userRequest);
         return "SUCCESS!!";
     }
 
